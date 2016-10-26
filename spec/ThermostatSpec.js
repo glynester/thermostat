@@ -2,7 +2,7 @@
 
 describe ('Thermostat:', function(){
   var thermostat;
-
+  
   beforeEach(function(){
     thermostat = new Thermostat();
   });
@@ -58,11 +58,11 @@ describe ('Thermostat:', function(){
   it('shows the appropriate colour based on temperature', function(){
     thermostat.powerSavingMode = false;
     thermostat.temperature = 15;
-    expect(thermostat.colour).toBe("lowUsage");
+    expect(thermostat.colour()).toBe("lowUsage");
     thermostat.temperature = 20;
-    expect(thermostat.colour).toBe("mediumUsage");
+    expect(thermostat.colour()).toBe("mediumUsage");
     thermostat.temperature = 28;
-    expect(thermostat.colour).toBe("highUsage");
+    expect(thermostat.colour()).toBe("highUsage");
   });
 
 });
