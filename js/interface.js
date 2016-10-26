@@ -1,6 +1,7 @@
 $( document ).ready(function(){
 var thermostat = new Thermostat();
 changeColour();
+weather();
 
   $("#temp-up").click(function(event){
     thermostat.increaseTemperature();
@@ -15,6 +16,11 @@ changeColour();
   $("#reset").click(function(event){
     thermostat.resetTemperature();
     changeColour();
+  });
+
+  $("#citysub").click(function(event){
+    $('#citytemp').text($('#city').val());
+    weather()
   });
 
   $("#psm-on").click(function(event){
@@ -44,6 +50,15 @@ changeColour();
     // }
   }
 
+   function weather(){
+     var url = 'http://api.openweathermap.org/data/2.5/weather?q='
+     var city = $('#city').val() || 'London' ;
+     var api = '&appid=3aa07a48be658a901acbe6b44ee42e17&units=metric'
+    $.get(url + city + api, function(temp) {
+      $( "#weather" ).text( temp.main.temp );
+    });
+   }
 
+// 3aa07a48be658a901acbe6b44ee42e17
 
 });
