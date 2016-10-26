@@ -3,6 +3,7 @@
   <head>
    <title>Thermostat</title>
    <link rel="stylesheet" href='css/interface.css'>
+   <link href="https://fonts.googleapis.com/css?family=Oswald" rel="stylesheet">
    <script src="https://code.jquery.com/jquery-3.1.1.js"
    integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
    crossorigin="anonymous"></script>
@@ -14,14 +15,22 @@
     The temperature in <span id='citytemp'>London</span> is <span id='weather'></span> degrees
     Enter a city: <input id='city'></input><button id='citysub'>Submit</button>
     <h1 id='temperature'></h1>
-    <p>
-     <button id='temp-up'>Increase temperature</button>
-     <button id='temp-down'>Decrease temperature</button>
-     <button id='reset'>Reset temperature</button>
-     power saving mode is <span id="power-saving-status">on</span>
-     <button id='psm-on'>PSM on</button>
-     <button id='psm-off'>PSM off</button>
-   </p>
+    <div>
+
+      <div class = "left">
+       <p><button class = 'btn' id='temp-up'>Increase temperature</button></p>
+       <p><button class = 'btn' id='temp-down'>Decrease temperature</button></p>
+       <p><button class = 'btn' id='reset'>Reset temperature</button></p>
+       Power saving mode is <span id="power-saving-status">on</span>
+       <p><button class = 'btn' id='psm-on'>PSM on</button>
+       <button class = 'btn' id='psm-off'>PSM off</button></p>
+    </div>
+    <div class = "left">
+      <img class = "thermImg" src = "http://www.clipartkid.com/images/490/thermometer-clip-art-black-and-white-clipart-panda-free-clipart-DFS0EL-clipart.png">
+
+    </div>
+
+  </div>
 
 
 
