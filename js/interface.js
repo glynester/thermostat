@@ -1,33 +1,48 @@
 $( document ).ready(function(){
 var thermostat = new Thermostat();
-$("#temperature").text(thermostat.temperature);
+changeColour();
 
   $("#temp-up").click(function(event){
     thermostat.increaseTemperature();
-    $("#temperature").text(thermostat.temperature);
+    changeColour();
   });
 
   $("#temp-down").click(function(event){
     thermostat.decreaseTemperature();
-    $("#temperature").text(thermostat.temperature);
+    changeColour();
   });
 
   $("#reset").click(function(event){
     thermostat.resetTemperature();
-    $("#temperature").text(thermostat.temperature);
+    changeColour();
   });
 
   $("#psm-on").click(function(event){
     thermostat.turnOnPowerSavingMode();
     $("#power-saving-status").text('on');
+    $("#power-saving-status").attr("class", thermostat.powerSavingMode)
   });
 
   $("#psm-off").click(function(event){
     thermostat.turnOffPowerSavingMode();
     $("#power-saving-status").text('off');
+    $("#power-saving-status").attr("class", thermostat.powerSavingMode)
   });
 
+  function changeColour(){
+    $("#temperature").text(thermostat.temperature);
+    $("#temperature").attr("class", thermostat.colour())
+    $("#power-saving-status").attr("class", thermostat.powerSavingMode)
 
+    // if (thermostat.colour() === "lowUsage") {
+    //   $("#temperature").css('background-color','green');
+    // } else if (thermostat.colour() === "mediumUsage") {
+    //   $("#temperature").css('background-color','yellow');
+    // }
+    // else {
+    //   $("#temperature").css('background-color','red');
+    // }
+  }
 
 
 
