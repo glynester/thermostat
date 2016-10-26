@@ -2,7 +2,7 @@
 
 describe ('Thermostat:', function(){
   var thermostat;
-  
+
   beforeEach(function(){
     thermostat = new Thermostat();
   });
@@ -25,7 +25,7 @@ describe ('Thermostat:', function(){
 
   it('will not allow the temperatue to drop below 10 degrees', function(){
     do { thermostat.decreaseTemperature(); }
-    while (thermostat.temperature >= 10);
+    while (thermostat.temperature > 10);
     expect(function(){thermostat.decreaseTemperature()}).toThrowError("Temperature cannot drop below 10 degrees");
   });
 
