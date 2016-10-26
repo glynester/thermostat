@@ -65,4 +65,11 @@ describe ('Thermostat:', function(){
     expect(thermostat.colour()).toBe("highUsage");
   });
 
+  it("resets the top temperature to the max allowed (25) if PS mode is switched on and the temp is higher than PS mode max", function(){
+    thermostat.turnOffPowerSavingMode();
+    thermostat.temperature = 30;
+    thermostat.turnOnPowerSavingMode();
+    expect(thermostat.temperature).toBe(25);
+  });
+
 });

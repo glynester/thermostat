@@ -14,7 +14,7 @@
   };
 
   Thermostat.prototype.increaseTemperature = function(){
-      if (this.temperature < this.maxTemperature) {     // && this.powerSavingMode == true) {
+      if (this.temperature < this.maxTemperature) {
         this.temperature += 1;
       } else if (this.powerSavingMode === true) {
         throw new Error("Max temp exceeded in power saving mode");
@@ -33,7 +33,10 @@
 
   Thermostat.prototype.turnOnPowerSavingMode = function(){
     this.powerSavingMode = true;
-    this.maxTemperature = this.MAX_TEMP_WITH_PS_MODE_ON;      //MAX_TEMPERATURE_WITH_POWER_SAVING_MODE_ON;
+    this.maxTemperature = this.MAX_TEMP_WITH_PS_MODE_ON;
+    if (this.temperature > this.MAX_TEMP_WITH_PS_MODE_ON) {
+      this.temperature = this.MAX_TEMP_WITH_PS_MODE_ON;
+    }
   };
 
   Thermostat.prototype.turnOffPowerSavingMode = function () {

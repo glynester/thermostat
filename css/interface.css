@@ -52,3 +52,19 @@ img.thermImg  {
   background: #3cb0fd;
   text-decoration: none;
 }
+
+#citytemp {
+  font-weight: bold;
+  text-transform: capitalize;
+}
+
+#temperature {
+  font-size: 150px;
+  font-weight: bold;
+}
+
+#degs {
+  vertical-align: super;
+  font-size: 100px;
+  font-weight: bold;
+}

@@ -26,6 +26,7 @@ weather();
   $("#psm-on").click(function(event){
     thermostat.turnOnPowerSavingMode();
     $("#power-saving-status").text('on');
+    $('#temperature').text(thermostat.temperature);
     $("#power-saving-status").attr("class", thermostat.powerSavingMode)
   });
 
@@ -53,7 +54,7 @@ weather();
    function weather(){
      var url = 'http://api.openweathermap.org/data/2.5/weather?q='
      var city = $('#city').val() || 'London' ;
-     var api = '&appid=3aa07a48be658a901acbe6b44ee42e17&units=metric'
+     var api = '&appid=76a0e8d874a07c5652d4f694d040b672&units=metric'
     $.get(url + city + api, function(temp) {
       $( "#weather" ).text( temp.main.temp );
     });
