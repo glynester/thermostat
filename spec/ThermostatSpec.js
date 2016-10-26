@@ -50,9 +50,19 @@ describe ('Thermostat:', function(){
   });
 
   it('Reset button resets temperature to 20', function(){
-    thermostat.currentTemperature = 23
+    thermostat.temperature = 23
     thermostat.resetTemperature();
-    expect(thermostat.currentTemperature).toBe(20);
+    expect(thermostat.temperature).toBe(20);
+  });
+
+  it('shows the appropriate colour based on temperature', function(){
+    thermostat.powerSavingMode = false;
+    thermostat.temperature = 15;
+    expect(thermostat.colour).toBe("lowUsage");
+    thermostat.temperature = 20;
+    expect(thermostat.colour).toBe("mediumUsage");
+    thermostat.temperature = 28;
+    expect(thermostat.colour).toBe("highUsage");
   });
 
 });
