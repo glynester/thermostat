@@ -42,7 +42,17 @@ describe ('Thermostat:', function(){
     for (var i = 0; i < 12; i++) {
       thermostat.increaseTemperature();
     }
-    expect(function(){thermostat()}).toThrowError("Max temp exceeded with poser saving mode");
-  })
+    expect(function(){thermostat.increaseTemperature()}).toThrowError("Max temperature exceeded");
+  });
+
+  it('powersaving mode is set to on as default', function(){
+    expect(thermostat.powerSavingMode).toBe(true)
+  });
+
+  it('Reset button resets temperature to 20', function(){
+    thermostat.currentTemperature = 23
+    thermostat.resetTemperature();
+    expect(thermostat.currentTemperature).toBe(20);
+  });
 
 });
