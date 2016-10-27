@@ -1,12 +1,14 @@
 'use strict';
 
   function Thermostat(){
-    this.temperature = 20;
     this.powerSavingMode = true;
-    this.maxTemperature = 25;
     this.MAX_TEMP_WITH_PS_MODE_ON = 25;
     this.MAX_TEMP_WITH_PS_MODE_OFF = 32;
     this.DEFAULT_TEMP = 20;
+    this.MINIMUM_TEMP = 10;
+    this.MEDIUM_USAGE_LIMIT = 18;
+    this.maxTemperature = this.MAX_TEMP_WITH_PS_MODE_ON;
+    this.temperature = this.DEFAULT_TEMP;
   }
 
   Thermostat.prototype.getCurrentTemperature = function(){
@@ -14,7 +16,7 @@
   };
 
   Thermostat.prototype.increaseTemperature = function(){
-      if (this.temperature < this.maxTemperature) {
+      if (this.isLessThanMaximumTemperature()) {
         this.temperature += 1;
       } else if (this.powerSavingMode === true) {
         throw new Error("Max temp exceeded in power saving mode");
@@ -23,8 +25,12 @@
       }
    };
 
+   Thermostat.prototype.isLessThanMaximumTemperature = function(){
+     return (this.temperature < this.maxTemperature);
+   };
+
   Thermostat.prototype.decreaseTemperature = function(){
-    if (this.temperature > 10){
+    if (this.temperature > this.MINIMUM_TEMP){
      this.temperature -= 1;
     } else {
       throw new Error("Temperature cannot drop below 10 degrees");
@@ -49,7 +55,7 @@
   };
 
   Thermostat.prototype.colour = function () {
-    if (this.temperature < 18 ) {
+    if (this.temperature < this.MEDIUM_USAGE_LIMIT) {
       return 'lowUsage'
     } else if (this.temperature < this.MAX_TEMP_WITH_PS_MODE_ON) {
       return 'mediumUsage'

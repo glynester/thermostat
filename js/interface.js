@@ -55,11 +55,11 @@ weather();
      var url = 'http://api.openweathermap.org/data/2.5/weather?q='
      var city = $('#city').val() || 'London' ;
      var api = '&appid=76a0e8d874a07c5652d4f694d040b672&units=metric'
-    $.get(url + city + api, function(temp) {
-      $( "#weather" ).text( temp.main.temp );
+    //  Ajax call to API.
+    $.get(url + city + api, function(weatherData) {
+      // References the temperature in the JSON? data returned.
+      $( "#weather" ).text( weatherData.main.temp );
     });
    }
-
-// 3aa07a48be658a901acbe6b44ee42e17
 
 });
