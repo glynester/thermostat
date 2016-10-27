@@ -10,8 +10,9 @@ class ThermostatApi < Sinatra::Base
     "API for Thermostat - welcome!"
   end
 
-  # post '/settings' do
-  get '/settings/xxx' do
+  post '/settings' do
+  # get '/settings/xxx' do
+    headers 'Access-Control-Allow-Origin' => '*'
     settings = ThermostatSettings.first
     temperature = settings.temperature
     city = settings.city
@@ -19,6 +20,7 @@ class ThermostatApi < Sinatra::Base
   end
 
   get '/settings' do
+    headers 'Access-Control-Allow-Origin' => '*'
     t = params[:temp]
     c = params[:city]
     "city = #{c} and temperature = #{t}"

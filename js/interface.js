@@ -1,5 +1,6 @@
 $( document ).ready(function(){
 var thermostat = new Thermostat();
+thermostat.GB_API_URL = "http://localhost:9292/settings";
 changeColour();
 weather();
 
@@ -40,7 +41,7 @@ weather();
   $("#citysub").click(function(event){
     var city = $('#city').val() || "London";
     $('#citytemp').text(city);
-    weather(city)
+    weather(city);
   });
 
    function weather(city){
@@ -52,6 +53,27 @@ weather();
       // References the temperature in the JSON? data returned.
       $( "#weather" ).text( weatherData.main.temp );
     });
+   }
+
+   $("#city").on("change", function(){
+     updateSettingsApi();
+     console.log("city changed!!!")
+   });
+
+   $("#temperature").on('DOMSubtreeModified',function(){
+     updateSettingsApi();
+     console.log("temperature changed!!!")
+   })
+
+
+   function updateSettingsApi(){
+     var url = thermostat.GB_API_URL;
+     var city = $('#city').val() || "London";       //Dry this out!!!!
+     var temp = $('#temperature').html();
+     var string = url + "?city=" + city + "&temp=" + temp;
+     console.log(string);
+     $.post(url + "?city=" + city + "&temp=" + temp,function(){
+     });
    }
 
 });
