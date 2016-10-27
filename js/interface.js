@@ -18,21 +18,16 @@ weather();
     changeColour();
   });
 
-  $("#citysub").click(function(event){
-    $('#citytemp').text($('#city').val());
-    weather()
-  });
-
   $("#psm-on").click(function(event){
     thermostat.turnOnPowerSavingMode();
-    $("#power-saving-status").text('on');
+    $("#power-saving-status").text('ON');
     $('#temperature').text(thermostat.temperature);
     $("#power-saving-status").attr("class", thermostat.powerSavingMode)
   });
 
   $("#psm-off").click(function(event){
     thermostat.turnOffPowerSavingMode();
-    $("#power-saving-status").text('off');
+    $("#power-saving-status").text('OFF');
     $("#power-saving-status").attr("class", thermostat.powerSavingMode)
   });
 
@@ -40,20 +35,17 @@ weather();
     $("#temperature").text(thermostat.temperature);
     $("#temperature").attr("class", thermostat.colour())
     $("#power-saving-status").attr("class", thermostat.powerSavingMode)
-
-    // if (thermostat.colour() === "lowUsage") {
-    //   $("#temperature").css('background-color','green');
-    // } else if (thermostat.colour() === "mediumUsage") {
-    //   $("#temperature").css('background-color','yellow');
-    // }
-    // else {
-    //   $("#temperature").css('background-color','red');
-    // }
   }
 
-   function weather(){
+  $("#citysub").click(function(event){
+    var city = $('#city').val() || "London";
+    $('#citytemp').text(city);
+    weather(city)
+  });
+
+   function weather(city){
      var url = 'http://api.openweathermap.org/data/2.5/weather?q='
-     var city = $('#city').val() || 'London' ;
+    //  var city = $('#city').val() || 'London' ;
      var api = '&appid=76a0e8d874a07c5652d4f694d040b672&units=metric'
     //  Ajax call to API.
     $.get(url + city + api, function(weatherData) {
