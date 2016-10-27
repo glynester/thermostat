@@ -1,5 +1,5 @@
-class ThermostatApi
-  
+class ThermostatSettings
+
   include DataMapper::Resource
 
   property :id,               Serial
