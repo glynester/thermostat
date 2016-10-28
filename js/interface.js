@@ -1,8 +1,8 @@
 $( document ).ready(function(){
 var thermostat = new Thermostat();
-thermostat.GB_API_URL = "http://localhost:9292/settings";
 changeColour();
 weather();
+getSettingsApi();
 
   $("#temp-up").click(function(event){
     thermostat.increaseTemperature();
@@ -60,20 +60,52 @@ weather();
      console.log("city changed!!!")
    });
 
-   $("#temperature").on('DOMSubtreeModified',function(){
+   $("body").on('DOMSubtreeModified','#temperature',function(){
      updateSettingsApi();
      console.log("temperature changed!!!")
    })
 
+   //Problem - there are 2 temp changes happening so 2 api calls.
 
+   // This is working!
    function updateSettingsApi(){
-     var url = thermostat.GB_API_URL;
+     var url = "http://localhost:9292/update";
      var city = $('#city').val() || "London";       //Dry this out!!!!
      var temp = $('#temperature').html();
      var string = url + "?city=" + city + "&temp=" + temp;
-     console.log(string);
-     $.post(url + "?city=" + city + "&temp=" + temp,function(){
+    //  console.log(string);
+     $.get(url + "?city=" + city + "&temp=" + temp,function(){
      });
    }
+
+// function getSettingsApi(){
+//   $.ajax({
+//   dataType: "json",
+//   url: 'http://localhost:9292/retrieve.json',
+//   data: data,
+//   success: success
+// });
+  //  $.ajax({
+  //      url: 'http://localhost:9292/retrieve.json',
+  //      data: myData,
+  //      type: 'GET',
+  //      crossDomain: true,
+  //      dataType: 'jsonp',
+  //      success: function() { alert("Success"); },
+  //      error: function() { alert('Failed!'); },
+  //      beforeSend: setHeader
+  //  });
+// }
+
+   function getSettingsApi(){
+     var url = "http://localhost:9292/retrieve.json";
+     $.getJSON(url,function(thermoData){
+        console.log(thermoData);
+        $('#city').val(thermoData.city);
+        $('#citytemp').html(thermoData.city);
+        $('#temperature').html(thermoData.temp);
+     });
+   }
+
 
 });

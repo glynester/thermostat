@@ -3,6 +3,7 @@ ENV['RACK_ENV'] ||= 'development'
 require 'sinatra/base'
 require 'sinatra/flash'
 require_relative 'data_mapper_setup'
+require 'json'
 
 class ThermostatApi < Sinatra::Base
 
@@ -10,16 +11,19 @@ class ThermostatApi < Sinatra::Base
     "API for Thermostat - welcome!"
   end
 
-  post '/settings' do
-  # get '/settings/xxx' do
+  get '/retrieve.json' do
     headers 'Access-Control-Allow-Origin' => '*'
-    settings = ThermostatSettings.first
+    settings = ThermostatSettings.last
     temperature = settings.temperature
     city = settings.city
     "city (ex DB) = #{city} and temperature (ex DB) = #{temperature}"
+    data = {city: city, temp: temperature}
+    # data = {city: "Madrid", temp: "18"}
+    data.to_json
   end
 
-  get '/settings' do
+  # Below is working!
+  get '/update' do
     headers 'Access-Control-Allow-Origin' => '*'
     t = params[:temp]
     c = params[:city]
